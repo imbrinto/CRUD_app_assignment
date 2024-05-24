@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
         title: 'CRUD App',
         theme: AppTheme.defaultAppTheme,
         themeMode: ThemeMode.system,
-        home: const HomePage());
+        home: const HomePage()
+    );
   }
 }

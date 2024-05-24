@@ -71,15 +71,53 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildProductList(ProductModel productModel) {
     return ListTile(
+      leading: Image(
+        image: NetworkImage(productModel.img!),
+        height: 45,
+        width: 45,
+        // displayed a loader until fetching the image from the api.
+        loadingBuilder: (context, child, loadingProgress) {
+          if (loadingProgress == null) {
+            return child;
+          }
+          return const CircularProgressIndicator();
+        },
+        // handled error if there is any invalid argument in productModel.img
+        errorBuilder: (context, error, stackTrace) {
+          return const Icon(Icons.error);
+        },
+      ),
       title: Text(
         productModel.productName ?? 'Unknown',
         style: const TextStyle(fontWeight: FontWeight.bold),
       ),
       subtitle: Wrap(
         children: [
-          Text('Unit Price: ${productModel.unitPrice}'),
-          Text(' Quantity: ${productModel.qty}'),
-          Text('Total Price: ${productModel.totalPrice}'),
+          Text(
+            'Product Code: ${productModel.productCode}',
+            style: const TextStyle(fontWeight: FontWeight.w700),
+          ),
+          Text(
+            'Unit Price: ${productModel.unitPrice} ',
+            style: const TextStyle(
+                fontSize: 12,
+                color: Colors.grey,
+                fontWeight: FontWeight.bold),
+          ),
+          Text(
+            'Quantity: ${productModel.qty}',
+            style: const TextStyle(
+                fontSize: 12,
+                color: Colors.grey,
+                fontWeight: FontWeight.bold),
+          ),
+          Text(
+            'Total Price: ${productModel.totalPrice}',
+            style: const TextStyle(
+                fontSize: 12,
+                color: Colors.grey,
+                fontWeight: FontWeight.bold),
+          ),
         ],
       ),
       trailing: Wrap(

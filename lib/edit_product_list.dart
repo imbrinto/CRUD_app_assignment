@@ -200,19 +200,18 @@ class _EditProductListState extends State<EditProductList> {
     String updateProductUrl =
         'https://crud.teamrabbil.com/api/v1/UpdateProduct/${widget.productModel.id}';
     Uri uri = Uri.parse(updateProductUrl);
-    Response response = await post(
-        uri,
+    Response response = await post(uri,
         headers: {'content-type': 'application/json'},
         body: jsonEncode(inputData));
 
-    if(response.statusCode == 200){
+    if (response.statusCode == 200) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Product Details Updated!'),
         ),
       );
       Navigator.pop(context, true);
-    }else{
+    } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Update Product Failed! Please try again.'),
@@ -221,7 +220,6 @@ class _EditProductListState extends State<EditProductList> {
     }
     _updateProductInProgress = false;
     setState(() {});
-
   }
 
   @override
